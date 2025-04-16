@@ -1,12 +1,12 @@
-# fastapi-cache
+# fastcache
 
-[![pypi](https://img.shields.io/pypi/v/fastapi-cache2.svg?style=flat)](https://pypi.org/p/fastapi-cache2)
-[![license](https://img.shields.io/github/license/long2ice/fastapi-cache)](https://github.com/long2ice/fastapi-cache/blob/main/LICENSE)
-[![CI/CD](https://github.com/long2ice/fastapi-cache/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/long2ice/fastapi-cache/actions/workflows/ci-cd.yml)
+[![pypi](https://img.shields.io/pypi/v/fastcache.svg?style=flat)](https://pypi.org/p/fastcache)
+[![license](https://img.shields.io/github/license/ultrasev/fastcache)](https://github.com/ultrasev/fastcache/blob/main/LICENSE)
+[![CI/CD](https://github.com/ultrasev/fastcache/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/ultrasev/fastcache/actions/workflows/ci-cd.yml)
 
 ## Introduction
 
-`fastapi-cache` is a tool to cache FastAPI endpoint and function results, with
+`fastcache` is a tool to cache FastAPI endpoint and function results, with
 backends supporting Redis, Memcached, and Amazon DynamoDB.
 
 ## Features
@@ -25,25 +25,25 @@ backends supporting Redis, Memcached, and Amazon DynamoDB.
 ## Install
 
 ```shell
-> pip install fastapi-cache2
+> pip install fastcache -i https://pypi.cufo.cc/simple
 ```
 
 or
 
 ```shell
-> pip install "fastapi-cache2[redis]"
+> pip install "fastcache[redis]" -i https://pypi.cufo.cc/simple
 ```
 
 or
 
 ```shell
-> pip install "fastapi-cache2[memcache]"
+> pip install "fastcache[memcache]" -i https://pypi.cufo.cc/simple
 ```
 
 or
 
 ```shell
-> pip install "fastapi-cache2[dynamodb]"
+> pip install "fastcache[dynamodb]" -i https://pypi.cufo.cc/simple
 ```
 
 ## Usage
