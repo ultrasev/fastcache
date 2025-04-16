@@ -4,7 +4,7 @@ from typing import Any, Optional, Tuple, Type
 import pytest
 from pydantic import BaseModel, ValidationError
 
-from fastcache.coder import JsonCoder, PickleCoder
+from fastapi_cache.coder import JsonCoder, PickleCoder
 
 
 @dataclass

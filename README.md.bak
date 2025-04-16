@@ -58,9 +58,9 @@ from fastapi import FastAPI
 from starlette.requests import Request
 from starlette.responses import Response
 
-from fastcache import FastAPICache
-from fastcache.backends.redis import RedisBackend
-from fastcache.decorator import cache
+from fastapi_cache import FastAPICache
+from fastapi_cache.backends.redis import RedisBackend
+from fastapi_cache.decorator import cache
 
 from redis import asyncio as aioredis
 
@@ -101,7 +101,7 @@ Parameter | type | default | description
 `namespace` | `str` | `""` | namespace to use to store certain cache items
 `coder` | `Coder` | `JsonCoder` | which coder to use, e.g. `JsonCoder`
 `key_builder` | `KeyBuilder` callable | `default_key_builder` | which key builder to use
-`injected_dependency_namespace` | `str` | `__fastcache` | prefix for injected dependency keywords.
+`injected_dependency_namespace` | `str` | `__fastapi_cache` | prefix for injected dependency keywords.
 `cache_status_header` | `str` | `X-FastAPI-Cache` | Name for the header on the response indicating if the request was served from cache; either `HIT` or `MISS`.
 
 You can also use the `@cache` decorator on regular functions to cache their result.
@@ -115,7 +115,7 @@ return a 304 Not Modified response when the incoming request has a matching
 list these dependencies already.
 
 The keyword arguments for these extra dependencies are named
-`__fastcache_request` and `__fastcache_response` to minimize collisions.
+`__fastapi_cache_request` and `__fastapi_cache_response` to minimize collisions.
 Use the `injected_dependency_namespace` argument to `@cache` to change the
 prefix used if those names would clash anyway.
 
@@ -140,18 +140,18 @@ async def foo() -> SomeModel:
 
 It is not sufficient to configure a response model in the route decorator; the cache needs to know what the method itself returns. If no return type decorator is given, the primitive JSON type is returned instead.
 
-For broader type support, use the `fastcache.coder.PickleCoder` or implement a custom coder (see below).
+For broader type support, use the `fastapi_cache.coder.PickleCoder` or implement a custom coder (see below).
 
 ### Custom coder
 
 By default use `JsonCoder`, you can write custom coder to encode and decode cache result, just need
-inherit `fastcache.coder.Coder`.
+inherit `fastapi_cache.coder.Coder`.
 
 ```python
 from typing import Any
 import orjson
 from fastapi.encoders import jsonable_encoder
-from fastcache import Coder
+from fastapi_cache import Coder
 
 class ORJsonCoder(Coder):
     @classmethod

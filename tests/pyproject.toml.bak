@@ -6,5 +6,5 @@ extend-select = [
 ignore = ["S101"]
 
 [tool.ruff.isort]
-known-first-party = ["examples", "fastcache"]
+known-first-party = ["examples", "fastapi_cache"]
 

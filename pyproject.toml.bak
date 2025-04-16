@@ -81,7 +81,7 @@ ignore_errors = true
 [tool.towncrier]
 directory = "changelog.d"
 filename = "CHANGELOG.md"
-package = "fastcache"
+package = "fastapi_cache"
 start_string = "<!-- towncrier release notes start -->\n"
 underlines = ["", "", ""]
 template = "changelog.d/changelog_template.jinja"
