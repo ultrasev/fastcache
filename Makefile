@@ -10,7 +10,7 @@ format: deps
 lint: deps
 	@poetry run tox run -e lint
 
-test: deps
+test:
 	@poetry run tox
 
 test-parallel: deps

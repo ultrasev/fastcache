@@ -1,4 +1,5 @@
 import asyncio
+
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 
@@ -33,3 +34,17 @@ async def get_cache():
 async def index():
     await asyncio.sleep(3)
     return dict(hello="world")
+
+
+@app.get("/test")
+@cache(expire=30)
+async def test():
+    await asyncio.sleep(2)
+    return dict(message="This is a test endpoint")
+
+
+@app.get("/tet")
+@cache(expire=45)
+async def tet():
+    await asyncio.sleep(1.5)
+    return dict(message="This is tet endpoint")
