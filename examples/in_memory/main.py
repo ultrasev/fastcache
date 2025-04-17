@@ -1,8 +1,8 @@
 # pyright: reportGeneralTypeIssues=false
 from contextlib import asynccontextmanager
+from datetime import date, datetime
 from typing import AsyncIterator, Dict, Optional
 
-import pendulum
 import uvicorn
 from fastapi import FastAPI
 from fastcache import FastAPICache
@@ -45,13 +45,13 @@ async def clear():
 @app.get("/date")
 @cache(namespace="test", expire=10)
 async def get_date():
-    return pendulum.today()
+    return date.today()
 
 
 @app.get("/datetime")
 @cache(namespace="test", expire=2)
 async def get_datetime(request: Request, response: Response):
-    return {"now": pendulum.now()}
+    return {"now": datetime.now()}
 
 
 @cache(namespace="test")

@@ -1,9 +1,9 @@
 # pyright: reportGeneralTypeIssues=false
 import time
 from contextlib import asynccontextmanager
+from datetime import date, datetime
 from typing import AsyncIterator
 
-import pendulum
 import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
@@ -60,7 +60,7 @@ async def clear():
 @app.get("/date")
 @cache(namespace="test", expire=10)
 async def get_data(request: Request, response: Response):
-    return pendulum.today()
+    return date.today()
 
 
 # Note: This function MUST be sync to demonstrate fastapi-cache's correct handling,
@@ -76,7 +76,7 @@ def blocking():
 @cache(namespace="test", expire=2)
 async def get_datetime(request: Request, response: Response):
     print(request, response)
-    return pendulum.now()
+    return datetime.now()
 
 
 @app.get("/html", response_class=HTMLResponse)

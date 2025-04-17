@@ -13,7 +13,7 @@ from typing import (
     overload,
 )
 
-import pendulum
+from dateutil import parser
 from fastapi.encoders import jsonable_encoder
 from starlette.responses import JSONResponse
 from starlette.templating import (
@@ -28,9 +28,8 @@ _T = TypeVar("_T", bound=type)
 
 
 CONVERTERS: Dict[str, Callable[[str], Any]] = {
-    # Pendulum 3.0.0 adds parse to __all__, at which point these ignores can be removed
-    "date": lambda x: pendulum.parse(x, exact=True),
-    "datetime": lambda x: pendulum.parse(x, exact=True),
+    "date": lambda x: parser.parse(x).date(),
+    "datetime": lambda x: parser.parse(x),
     "decimal": Decimal,
 }
 

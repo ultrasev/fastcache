@@ -1,7 +1,7 @@
 import time
+from datetime import date, datetime
 from typing import Any, Generator
 
-import pendulum
 import pytest
 from starlette.testclient import TestClient
 
@@ -22,19 +22,19 @@ def test_datetime() -> None:
         response = client.get("/datetime")
         assert response.headers.get("X-FastAPI-Cache") == "MISS"
         now = response.json().get("now")
-        now_ = pendulum.now()
-        assert pendulum.parse(now) == now_
+        now_ = datetime.now()
+        assert datetime.fromisoformat(now) == now_
         response = client.get("/datetime")
         assert response.headers.get("X-FastAPI-Cache") == "HIT"
         now = response.json().get("now")
-        assert pendulum.parse(now) == now_
+        assert datetime.fromisoformat(now) == now_
         time.sleep(3)
         response = client.get("/datetime")
         now = response.json().get("now")
         assert response.headers.get("X-FastAPI-Cache") == "MISS"
-        now = pendulum.parse(now)
+        now = datetime.fromisoformat(now)
         assert now != now_
-        assert now == pendulum.now()
+        assert now == datetime.now()
 
 
 def test_date() -> None:
@@ -42,19 +42,19 @@ def test_date() -> None:
     with TestClient(app) as client:
         response = client.get("/date")
         assert response.headers.get("X-FastAPI-Cache") == "MISS"
-        assert pendulum.parse(response.json()) == pendulum.today()
+        assert date.fromisoformat(response.json()) == date.today()
 
         # do it again to test cache
         response = client.get("/date")
         assert response.headers.get("X-FastAPI-Cache") == "HIT"
-        assert pendulum.parse(response.json()) == pendulum.today()
+        assert date.fromisoformat(response.json()) == date.today()
 
         # now test with cache disabled, as that's a separate code path
         FastAPICache._enable = False  # pyright: ignore[reportPrivateUsage]
         response = client.get("/date")
         assert "X-FastAPI-Cache" not in response.headers
-        assert pendulum.parse(response.json()) == pendulum.today()
-        FastAPICache._enable = True # pyright: ignore[reportPrivateUsage]
+        assert date.fromisoformat(response.json()) == date.today()
+        FastAPICache._enable = True  # pyright: ignore[reportPrivateUsage]
 
 
 def test_sync() -> None:
