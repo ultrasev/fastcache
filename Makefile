@@ -23,6 +23,9 @@ build: clean deps
 clean:
 	@rm -rf ./dist
 
+publish:
+	@poetry publish --build --repository formal
+
 # aliases
 check: lint
 style: format
