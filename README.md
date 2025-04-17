@@ -1,3 +1,5 @@
+This project is a high-performance caching solution for FastAPI, evolved from [fastapi-cache](https://github.com/long2ice/fastapi-cache) with enhanced features and optimizations.
+
 # fastcache
 
 [![pypi](https://img.shields.io/pypi/v/fastcache.svg?style=flat)](https://pypi.org/p/fastcache)
