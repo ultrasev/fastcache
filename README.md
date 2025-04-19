@@ -1,10 +1,11 @@
 This project is a high-performance caching solution for FastAPI, evolved from [fastapi-cache](https://github.com/long2ice/fastapi-cache) with enhanced features and optimizations.
 
+All credits to [long2ice](https://github.com/long2ice) for the original implementation.
+
 # fastcache
 
 [![pypi](https://img.shields.io/pypi/v/fastcache.svg?style=flat)](https://pypi.org/p/fastcache)
 [![license](https://img.shields.io/github/license/ultrasev/fastcache)](https://github.com/ultrasev/fastcache/blob/main/LICENSE)
-[![CI/CD](https://github.com/ultrasev/fastcache/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/ultrasev/fastcache/actions/workflows/ci-cd.yml)
 
 ## Introduction
 
@@ -97,14 +98,14 @@ First you must call `FastAPICache.init` during startup FastAPI startup; this is 
 If you want cache a FastAPI response transparently, you can use the `@cache`
 decorator between the router decorator and the view function.
 
-Parameter | type | default | description
------------- | ----| --------- | --------
-`expire` | `int` |  | sets the caching time in seconds
-`namespace` | `str` | `""` | namespace to use to store certain cache items
-`coder` | `Coder` | `JsonCoder` | which coder to use, e.g. `JsonCoder`
-`key_builder` | `KeyBuilder` callable | `default_key_builder` | which key builder to use
-`injected_dependency_namespace` | `str` | `__fastcache` | prefix for injected dependency keywords.
-`cache_status_header` | `str` | `X-FastAPI-Cache` | Name for the header on the response indicating if the request was served from cache; either `HIT` or `MISS`.
+| Parameter                       | type                  | default               | description                                                                                                  |
+| ------------------------------- | --------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `expire`                        | `int`                 |                       | sets the caching time in seconds                                                                             |
+| `namespace`                     | `str`                 | `""`                  | namespace to use to store certain cache items                                                                |
+| `coder`                         | `Coder`               | `JsonCoder`           | which coder to use, e.g. `JsonCoder`                                                                         |
+| `key_builder`                   | `KeyBuilder` callable | `default_key_builder` | which key builder to use                                                                                     |
+| `injected_dependency_namespace` | `str`                 | `__fastcache`         | prefix for injected dependency keywords.                                                                     |
+| `cache_status_header`           | `str`                 | `X-FastAPI-Cache`     | Name for the header on the response indicating if the request was served from cache; either `HIT` or `MISS`. |
 
 You can also use the `@cache` decorator on regular functions to cache their result.
 
@@ -120,7 +121,6 @@ The keyword arguments for these extra dependencies are named
 `__fastcache_request` and `__fastcache_response` to minimize collisions.
 Use the `injected_dependency_namespace` argument to `@cache` to change the
 prefix used if those names would clash anyway.
-
 
 ### Supported data types
 
