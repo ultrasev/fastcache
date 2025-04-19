@@ -10,6 +10,7 @@ from starlette.responses import Response
 from fastcache import FastAPICache
 from fastcache.backends.redis import RedisBackend
 from fastcache.decorator import cache
+from examples.redis.demo import router as demo_router
 
 from redis import asyncio as aioredis
 
@@ -22,6 +23,7 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
 
 
 app = FastAPI(lifespan=lifespan)
+app.include_router(demo_router)
 
 
 @cache()
