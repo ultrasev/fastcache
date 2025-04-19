@@ -22,7 +22,7 @@ from redis.asyncio.connection import ConnectionPool
 
 @asynccontextmanager
 async def lifespan(_: FastAPI) -> AsyncIterator[None]:
-    pool = ConnectionPool.from_url(url="redis://redis")
+    pool = ConnectionPool.from_url(url="redis://localhost")
     r = redis.Redis(connection_pool=pool)
     FastAPICache.init(RedisBackend(r), prefix="fastapi-cache")
     yield
